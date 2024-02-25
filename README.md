@@ -1,12 +1,14 @@
 # Instagram Downloader Bot
 
-This is a Telegram bot built with [aiogram](https://github.com/aiogram/aiogram) that allows users to download Instagram videos without watermarks.
+This is a Telegram bot built with [aiogram](https://github.com/aiogram/aiogram) that allows users to download Instagram videos and posts without watermarks.
 
 ## Features
 
-- **Download Instagram Reels**: Users can simply paste the link to an Instagram Reel, and the bot will provide a downloadable version of the video.
+- **Download Instagram Posts and Reels**: Users can simply paste the link to an Instagram Post or Reel, and the bot will provide a downloadable version of the content.
 - **Inline Menu**: The bot provides an interactive inline menu for easy navigation and interaction.
+- **State Control**: By controlling states bot will function as the user personally wants
 - **Error Handling**: Handles incorrect URLs gracefully and provides appropriate error messages to users.
+- **Parser**: By parsing links bot can get actual URLs of video and send them as media without download
 
 ## Installation
 
@@ -29,6 +31,8 @@ This is a Telegram bot built with [aiogram](https://github.com/aiogram/aiogram) 
    ```python
    TOKEN = "your_token_here"
    ```
+
+**Do not forget to update chromedriver.exe if the version does not match your browser!**
 
 ## Usage
 

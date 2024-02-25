@@ -1,4 +1,3 @@
-import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -6,8 +5,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 # Start chrome in background (headless mode)
 options = webdriver.ChromeOptions()
-# options.add_argument('headless')
-# options.add_argument('window-size=1920x935')
+options.add_argument('headless')
+options.add_argument('window-size=1920x935')
 driver = webdriver.Chrome(options=options)
 driver.get('about:blank')
 
@@ -38,34 +37,32 @@ def post(link: str):
         # Open link
         driver.get(link)
 
-        # XPATH to element
+        # XPATH to photo url
         photo_xpath = "//img[@class='x5yr21d xu96u03 x10l6tqk x13vifvy x87ps6o xh8yej3']"
+        # XPATH to button
         button_xpath = "//button[@aria-label='Далее']"
 
         # Wait for Instagram
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, photo_xpath)))
 
-        unique_links = []
+        photo_links = []
+
         try:
+            # If webdriver can find next button in post = post have few photos
             button_element = driver.find_element(By.XPATH, button_xpath)
             for i in range(4):
+                # By clicking 4 times post is loading completely
                 button_element.click()
+        # If there are no button found, pass
         except Exception:
             pass
+
         elements = driver.find_elements(By.XPATH, photo_xpath)
+        # Because find_elementS used, we need to store photo links in list
         for photo in elements:
-            unique_links.append(photo.get_attribute('src'))
-        return unique_links
+            photo_links.append(photo.get_attribute('src'))
+
+        return photo_links
 
     else:
         return None
-
-
-# link = ""
-# result_generator = post(link)
-# print(len(result_generator))
-# print(result_generator)
-#
-# # for photo_src in result_generator:
-# #     print(photo_src)
-# # print(post(link))
